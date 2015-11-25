@@ -8,7 +8,14 @@
 var myApp = angular.module('myApp',[]);
 
 myApp.controller('MyController', ['$scope', function($scope) {
-  $scope.test = 'Heisann!';
+  $scope.items = [];
+  $scope.deleteditems = ["Aman", "Bedeho"];
+  $scope.addItem = function() {
+    $scope.items.push($scope.test);
+  }
+  $scope.deleteItem = function() {
+    $scope.deleteditems.push(this);
+  }
 
 }]);
 
@@ -21,21 +28,25 @@ myApp.controller('MyController', ['$scope', function($scope) {
 
 <body>
 
-<div ng-app="myApp">
-  <div ng-controller="MyController">
+  <div ng-app="myApp">
+    <div ng-controller="MyController">
 
-<input type="text" ng-model="test"><button ng-click="addItem">Save</button>
+  <input type="text" ng-model="test"><button ng-click="addItem()">Save</button>
 
-<ul id="todolist">
+  <ul id="todolist" ng-repeat="item in items">
+    <li>{{item}}<button ng-click="deleteItem()">x</button></li>
+  </ul>
 
-</ul>
+  <br/>
+  {{test}}
+   <br/>
+   Deleted items:<br/>
+  <ul id="deleteditems" ng-repeat="deleteditem in deleteditems">
+    <li>{{deleteditem}}</li>
+  </ul>
+  </div>
 
-<br/>
-{{test}}
+  </div>
 
-</div>
-
-</div>
-
-</body>
-</html>
+  </body>
+  </html>
